@@ -16,5 +16,5 @@ VJ(c)
   2.Zapping  
   3.Cost Cutting  
   4.Back to High School Physics  
-  5.  
-  6.  
+  5.Hello World!  
+  6.Summing Digits  
