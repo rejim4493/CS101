@@ -5,6 +5,10 @@
 上課練習(a)  
 作業(b)  
 VJ(c)  
+  1.Say "Hello, World!" With C++  
+  2.Input and Output  
+  3.Hit the Lottery  
+  4.Iterated sums 
 第二週(2)  
 上課練習(a)  
 作業(b)  
