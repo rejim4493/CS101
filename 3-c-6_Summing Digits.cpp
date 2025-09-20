@@ -35,14 +35,19 @@ int main(void)
     int n = 1;
     while(n != 0){
         scanf("%d", &n);
-        int sum = 0;
-        while(n >= 10){
-            sum += n % 10;
-            n / 10;
+        if(n != 0){
+            int sum = 10;
+            while(sum >= 10){
+                sum = 0;
+                while(n > 0){
+                    sum += n % 10;
+                    n /= 10;
+                }//n>0時，n取個位數加總到sum，n/10，最終會是1/10=0，則脫出迴圈。11
+                n = sum;//sum是11, n 0=>11, 
+            }
+            printf("%d\n",n);//print 2
         }
-        n = sum;
-        printf("%d",n);
     }
     return 0;
-
 }
+
