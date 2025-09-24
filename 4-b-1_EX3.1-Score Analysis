@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+int main(void){
+    int count = 0, score = 0, Max = -1, Min = 101;
+    double total = 0, Pass = 0;
+    printf("Please input a score (-1 to end)...>");
+    scanf("%d",&score);
+    
+    while(score != -1){
+        if(score > 100||score < 0){
+            printf("invalid score.\n");//若超過100or0的邊界，不會進行計算，但仍在迴圈。
+        }else{
+            total += score;//輸入值加總到total
+            count += 1;//count計數+1
+            
+            if(score > Max){
+                Max = score;
+            }//比較MAX，若真則取代MAX
+            
+            if(score < Min){
+                Min = score;
+            }//比較MIN，若真則取代MIN
+            
+            if(score >= 60){
+                Pass += 1;
+            }//計算如果>=60就++
+            
+        }
+        
+        printf("Please input a score (-1 to end)...>");
+        scanf("%d",&score);//繼續輸入分數
+        
+    }
+    if(count != 0){
+        printf("\nAnalysis\n---------------------\nMax：%d\nMin：%d\nAvg：%.2f\nPass rate：%.2f%%", Max, Min, total/count, Pass/count*100);
+    }else{
+        printf("No grades were entered.\n");
+    }//如果沒有任何分數輸入，為避免除以0，會走進else.
+    
+    return 0;
+}
