@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+int main(void){
+  int d = 0,g = 0, r = 0;
+      scanf("%d%d%d", &d, &g, &r);
+      int y = 0, sum = 0;
+      while(sum < g){
+          sum = (sum + d) * (1+0.01*r);
+          y++;
+      }
+      printf("We need %d years to reach the goal(%d)\n", y, g);
+  
+      return 0;
+}
