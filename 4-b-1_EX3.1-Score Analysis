@@ -1,12 +1,33 @@
+/*
+◼ In addition to the class average, also output
+◼ the highest score
+◼ the lowest score
+◼ the percentage of passed (score >= 60) students
+
+test cases
+-1
+0 -1
+99 -1
+61 59 100 80 -1
+60 80 70 -1
+59 11 20 -1
+*/
+
 #include <stdio.h>
 
 int main(void){
     int count = 0, score = 0, Max = -1, Min = 101;
     double total = 0, Pass = 0;
-    printf("Please input a score (-1 to end)...>");
-    scanf("%d",&score);
     
-    while(score != -1){
+    //提示用戶輸入分數
+    printf("Please input a score (-1 to end)...>");
+    
+    //讀取用戶輸入
+    while(scanf("%d",&score) == 1){//最終成功讀取數值的數量要等於1，2個數值後面改2
+        if(score == -1){
+            break;
+        }//如果輸入的是-1，就結束
+        
         if(score > 100||score < 0){
             printf("invalid score.\n");//若超過100or0的邊界，不會進行計算，但仍在迴圈。
         }else{
@@ -28,8 +49,7 @@ int main(void){
         }
         
         printf("Please input a score (-1 to end)...>");
-        scanf("%d",&score);//繼續輸入分數
-        
+
     }
     if(count != 0){
         printf("\nAnalysis\n---------------------\nMax：%d\nMin：%d\nAvg：%.2f\nPass rate：%.2f%%", Max, Min, total/count, Pass/count*100);
@@ -39,3 +59,8 @@ int main(void){
     
     return 0;
 }
+/*
+原本我是在while前和裡面最後放scanf，while條件放score != -1，但這會有重複的程式碼。
+這樣可以省略scanf重複出現。
+
+*/
