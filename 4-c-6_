@@ -1,0 +1,45 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+
+int main(void)
+{
+    int H = 0, D = 0, day = 1;
+    float Now = 0, U = 0, F = 0, x = 0;
+    scanf("%d%f%d%f", &H, &U, &D, &F);//6 3 1 10
+    x = U*F*0.01;
+    while(Now < H){
+        if(Now < 0){
+            break;
+        }
+        Now = Now + U;//0 = 0+3-1;2=2+2.7-1;3.7=3.7+2.4-1
+        printf("%.2f\n",Now);
+        if(Now < H){
+            Now -= 1;
+            U = U-x;//U-U*F0.01
+            printf("%.2f\n",U);
+            if(Now > 0){
+                day++;
+            }
+            
+            printf("%d\n",day);
+        }
+    
+        
+    }
+    if(Now > H){
+        printf("success on day %d\n",day);        
+    }else{
+        printf("failure on day %d",day+1);
+    }
+
+
+
+    return 0;
+}
