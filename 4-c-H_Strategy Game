@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main(void)
+{
+    int J = 0,R = 0, i = 0, w = 0, k = 0, a = 0, b = 0, j = 0;
+    scanf("%d%d", &J, &R);
+    for(i = 0;i < R;i++){
+        for(j = 1;j <= J;j++){
+            k = 0;
+            k++;
+            if(k > J*(R-1) && k <= J*R){
+                scanf("%d", &a);
+                if(a>=b){
+                    b = a;
+                    w = j;
+                }
+            }
+        }
+    }
+    printf("%d", w);
+    
+    return 0;
+}
+
+//有錯
