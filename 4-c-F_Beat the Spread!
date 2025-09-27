@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int main(void)
+{
+    int n = 0,i = 0;
+    scanf("%d", &n);
+    for(i = 0;i < n;i++){
+        int s = 0, d = 0, sc1 = 0,sc2 = 0;
+        scanf("%d%d", &s, &d);
+        sc1 = (s+d)/2;
+        sc2 = sc1 - d;
+        if(sc2 < 0){
+            printf("impossible\n");
+        }
+        if(sc2 > sc1 && sc1 >= 0){
+            printf("%d %d\n", sc2, sc1);
+        }
+        if(sc1 > sc2 && sc2 >= 0){
+            printf("%d %d\n", sc1, sc2);
+        }
+    }
+
+    return 0;
+}
+
+//還有錯
