@@ -45,7 +45,7 @@ int main(void){
     }
     printf("%d\n", win);
     return 0;
-
+}
 //        printf("%f\n%f\n", pass, ave, N);
                 /*printf("%d\n", win);
                 printf("%d\n", j);
