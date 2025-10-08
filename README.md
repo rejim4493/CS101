@@ -33,6 +33,7 @@ VJ(c)
 作業(b)  
 VJ(c)  
   A_Above Average  
+  B_Strategy Game  
 第七週(7)  
 上課練習(a)  
 作業(b)  
