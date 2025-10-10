@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+void postfix(void){
+  char symbol;
+  precedence token;
+  int n = 0;
+  int top = 0;
+  stack[0] = eos;
+  for( token = get_token(&symbol, &n); token != eos;token = get_token(&symbol,&n)){
+    if(token == operand){
+      printf("%c", symbol);//case1
+  }else if(token == rparen){
+      /*unstack tokens until left parenthesis*/
+      while(stack[top] != lparen)
+        print_token(delete(&top));
+      delete(&top);/*discard the left parenthesis*/
+    }//case 3
+    else{
+      /**/
+      while(isp[stack[top]] >= icp[token])
+        printf_token(delete(&top));
+      add(&top, token);
+    }//case 2
+  }
+  while ( (token = delete(&top)) != eos)
+    print_token(token);
+  printf("\n");//pop out the remaining tokens in stack
+}
