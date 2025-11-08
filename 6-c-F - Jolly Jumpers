@@ -1,0 +1,73 @@
+/*
+A sequence of n > 0 integers is called a jolly jumper if the absolute values of the difference between
+successive elements take on all the values 1 through n − 1. For instance,
+1 4 2 3
+is a jolly jumper, because the absolutes differences are 3, 2, and 1 respectively. The definition implies
+that any sequence of a single integer is a jolly jumper. You are to write a program to determine whether
+or not each of a number of sequences is a jolly jumper.
+Input
+Each line of input contains an integer n ≤ 3000 followed by n integers representing the sequence.
+Output
+For each line of input, generate a line of output saying ‘Jolly’ or ‘Not jolly’.
+Sample Input
+4 1 4 2 3
+5 1 4 2 -1 6
+Sample Output
+Jolly
+Not jolly
+
+有n個整數的序列我們稱為jolly jumper，如果相鄰的2個數其差的絕對值恰好為1到n-1。例如：
+
+1 4 2 3
+
+就是jolly jumper（n=4）。因為相鄰2數的差的絕對值為3,2,1，就是1到n-1。但是
+
+1 4 2 -1 6
+
+不是jolly jumper（n=5）。因為相鄰2數的差的絕對值為3,2,3,7，並非1到n-1。
+
+你的任務是寫一個程式來判斷一個整數序列是否為jolly jumper。
+*/
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int n = 0;
+    
+    while(scanf("%d", &n) == 1){
+        int J[3000] = {};
+        for(int i = 0;i < n; i += 1){
+            scanf("%d", &J[i]);
+        }
+    
+        //bool array record diff num appear or Not
+        bool diff[3005] = {false};
+        for(int i = 1 ; i<n;i+=1)
+        {
+            int d = abs(J[i]-J[i-1]);
+            if(d >= 1 && d <= n-1){
+                diff[d] = true;
+            }
+        }
+        
+        // 檢查 1 ~ n-1 是否都出現
+        bool jolly = true;
+        for (int i = 1; i <= n - 1; i++) {
+            if (!diff[i]) {
+                jolly = false;
+                break;
+            }
+        }
+        
+        if(jolly)
+        {
+            printf("Jolly\n");
+        }
+        else
+        {
+            printf("Not jolly\n");
+        }
+    }
+    return 0;
+}
