@@ -17,6 +17,37 @@ Sample Output
 10201
 1101001
 */
+//最新版本三進位轉換
+#include <stdio.h>
+
+int main()
+{
+    int N = 0;
+    while(scanf("%d", &N) == 1 && N>=0)//n<0 break;
+    {
+        int rm[100] = {};//儲存每一個3進位的值
+        int i = 0;
+        
+        if(N == 0){
+            printf("0");
+        }
+        while(N>0){
+            rm[i]=N%3;//取餘數，得到三位數的一位
+            i+=1;
+            N=N/3;//除以三，繼續下一位
+        }
+
+        for(int j=i-1;j>=0;j-=1){
+            printf("%d",rm[j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+
+
+
 //錯誤版本
 #include <stdio.h>
 
