@@ -1,0 +1,109 @@
+這段有錯
+你這樣寫主要有幾個簡單的錯誤點：
+
+1. **標題行位置錯誤**  
+   題目要求 `Lumberjacks:` 只在最前面印一次，你現在每組測資都印一次。
+
+2. **輸出大小寫不符**  
+   題目範例是 `Ordered` / `Unordered`，你印的是 `ordered`（小寫）。
+
+3. **判斷邏輯多餘**  
+   你在迴圈裡每次都把 `order` 設成 1，只要有一個違反才設成 0。這樣雖然能跑，但邏輯比較繞，容易出錯。其實只要檢查有沒有違反排序即可。
+
+---
+
+### 簡短歸納
+- **錯在標題行要放迴圈外**  
+- **錯在輸出大小寫要和題目一致**  
+- **判斷邏輯寫得太複雜，可以簡化成「只要有違反就 Unordered」**
+#include <stdio.h>
+
+int main()
+{
+    int N = 0;
+    scanf("%d", &N);
+    for(int i = 0;i < N;i += 1)
+    {
+        int L[10] = {};
+        int order = -1;
+        for(int j=0;j<10;j+=1)
+        {
+            scanf("%d", &L[j]);
+        }
+        if(L[0]<L[1]){
+            for(int j=0;j<9;j+=1){
+                if(L[j]>L[j+1]){
+                    order = 0;
+                    break;
+                }else{
+                    order = 1;
+                }
+            }
+        }else if(L[0]>L[1]){
+            for(int j=0;j<9;j+=1){
+                if(L[j]<L[j+1]){
+                    order = 0;
+                    break;
+                }else{
+                    order = 1;
+                }
+            }
+        }
+        printf("Lumberjacks:");
+        /*for(int j=0;j<10;j+=1)
+        {
+            printf("%d ", L[j]);
+        }*/
+        if(order){
+            printf("\nordered\n");
+        }else{
+            printf("\nUnordered\n");
+        }
+    }
+    return 0;
+}
+
+正確寫法
+#include <stdio.h>
+
+int main()
+{
+    int N = 0;
+    scanf("%d", &N);
+
+    printf("Lumberjacks:\n");  // 標題只印一次
+
+    for(int i = 0; i < N; i++)
+    {
+        int L[10] = {};
+        for(int j = 0; j < 10; j++)
+        {
+            scanf("%d", &L[j]);
+        }
+
+        int ordered = 1; // 預設為有序
+
+        if(L[0] < L[1]) { // 檢查升序
+            for(int j = 0; j < 9; j++) {
+                if(L[j] > L[j+1]) {
+                    ordered = 0;
+                    break;
+                }
+            }
+        } else { // 檢查降序
+            for(int j = 0; j < 9; j++) {
+                if(L[j] < L[j+1]) {
+                    ordered = 0;
+                    break;
+                }
+            }
+        }
+
+        if(ordered) {
+            printf("Ordered\n");
+        } else {
+            printf("Unordered\n");
+        }
+    }
+    return 0;
+}
