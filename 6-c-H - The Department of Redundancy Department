@@ -1,0 +1,63 @@
+/*
+Write a program that will remove all duplicates from a sequence of integers and print the list of unique
+integers occuring in the input sequence, along with the number of occurences of each.
+Input
+The input file will contain a sequence of integers (positive, negative, and/or zero). The input file may
+be arbitrarily long.
+Output
+The output for this program will be a sequence of ordered pairs, separated by newlines. The first
+element of the pair must be an integer from the input file. The second element must be the number
+of times that that particular integer appeared in the input file. The elements in each pair are to be
+separated by space characters. The integers are to appear in the order in which they were contained
+in the input file.
+Sample Input
+3 1 2 2 1 3 5 3 3 2
+Sample Output
+3 4
+1 2
+2 3
+5 1
+*/
+#include <stdio.h>
+#include <stdlib.h>
+constexpr int size = 10000;
+constexpr int offset = 5000;
+int main()
+{
+    int x = 0;
+    int v[size]={};//save count number
+    bool seen[size]={false};//seen it or not
+    int order[size]={};//order
+    int i = 0 ;
+    int result = -1;
+    while(result){
+        scanf("%d",&x);
+        int idx = x + offset;//index = x + offset
+        if(!seen[idx]){
+            seen[idx] = true;//x seen save in index
+            v[idx] += 1;//x count save in index +1
+            order[i] = x;//x order 0 1 2 3 -1 4 5
+            i+=1;// order +1
+        }else{
+            v[x+offset] +=1;// //x count save in index +1
+        }
+        result = getchar() != '\n';
+    }
+    for(int j=0;j<i;j+=1){
+        printf("%d %d\n", order[j], v[order[j]+offset]);//j->i, order[0] == 3, v[3] == 4 
+    }
+    return 0;
+}
+
+/*
+1.問題在結束條件是甚麼？
+2.負數怎麼處理
+3.VJ 還是runtime error
+
+ANS
+用result = getchar() != '\n';//若真，存入1給result，若假存入0
+給while判斷result，0則跳出迴圈
+
+用偏移量，因為array 的index不能是負值。
+設5000，給seen[], v[]存。可以影響到-4999~5000
+*/
