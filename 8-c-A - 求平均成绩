@@ -1,0 +1,62 @@
+/*
+HDU 2023
+多組測資。每組輸入學生人數 n、課程數 m，接著輸入每位學生每門課的成績。請計算：每位學生平均成績、每門課平均成績，並統計多少名學生其所有課程成績皆 ≥ 該門課平均。
+假设一个班有n(n<=50)个学生，每人考m(m<=5)门课，求每个学生的平均成绩和每门课的平均成绩，并输出各科成绩均大于等于平均成绩的学生数量。
+Input
+输入数据有多个测试实例，每个测试实例的第一行包括两个整数n和m，分别表示学生数和课程数。然后是n行数据，每行包括m个整数（即：考试分数）。
+Output
+对于每个测试实例，输出3行数据，第一行包含n个数据，表示n个学生的平均成绩，结果保留两位小数；第二行包含m个数据，表示m门课的平均成绩，结果保留两位小数；第三行是一个整数，表示该班级中各科成绩均大于等于平均成绩的学生数量。
+每个测试实例后面跟一个空行。
+Sample
+Inputcopy	Outputcopy
+2 2
+5 10
+10 20
+7.50 15.00
+7.50 15.00
+1
+
+*/
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int n = 0;//n<=50
+    int m =0;//m<=5
+     while(scanf("%d%d", &n, &m) == 2){
+        int stu[50][5] = {};
+        int stuavage[50] = {};
+        int claavage[5] = {};
+        for(int i = 0;i < n; i++){
+            for(int j = 0;j<m;j++){
+                scanf("%d", &stu[i][j]);//i 表學生index, j表科目index
+            }
+        }
+        for(int i = 0;i < n; i++){
+            for(int j = 0;j<m;j++){
+                stuavage[i] += stu[i][j];//i學生的j科目存入i學生的成績加總
+                claavage[j] += stu[i][j];//i學生的j科目存入j科目的成績加總
+            }
+        }
+        for(int i = 0;i < n; i++){
+            printf("%.2lf ", (double)stuavage[i]/m);
+        }
+        printf("\n");
+        for(int j = 0;j<m;j++){
+            printf("%.2lf ", (double)claavage[j]/n);
+        }
+        printf("\n");
+        int count = 0;
+        for(int i = 0;i < n; i++){
+            for(int j = 0;j<m;j++){
+                if((double)claavage[j]/n > stu[i][j]){
+                    count += 1;
+                    break;
+                }
+            }
+        }
+        printf("%d\n\n", n-count);
+    }
+    return 0;
+}
