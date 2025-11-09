@@ -1,3 +1,61 @@
+
+//最終正確版
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int W = 1;
+    int H = 1;
+    int N = 1;
+    bool broad[505][505] = {};
+    while(scanf("%d%d%d", &W, &H, &N) == 3&& !(W==0&&H==0&&N==0)){//吃進棋盤長寬和矩形數量
+        for(int i = 0; i<500;i++){
+            for(int j = 0; j<500;j++){
+                broad[i][j] = false;
+            }
+        }//先將棋盤列為空的(false)
+        for(int i = 0;i < N;i++){//矩形數量
+            int x1, x2, y1, y2;
+            scanf("%d%d%d%d", &x1,&y1,&x2,&y2);//吃入矩形長寬
+            int temp = 0;
+            if(x1>x2){
+                temp = x2;
+                x2 = x1;
+                x1 = temp;
+            }
+            if(y1>y2){
+                temp = y2;
+                y2 = y1;
+                y1 = temp;
+            }
+            for(int x =x1; x<=x2;x++){
+                for(int y = y1; y<=y2;y++){
+                    broad[x-1][y-1] = true;
+                }
+            }
+        }
+        int epoint = 0;
+        for(int i = 0; i<W;i++){
+            for(int j = 0; j<H;j++){
+                if(!broad[i][j]){
+                    epoint++;
+                }
+            }
+        }//掃一遍整個
+        if(epoint == 0){
+            printf("There is no empty spots.\n");
+        }else if(epoint == 1){
+            printf("There is one empty spot.\n");
+        }else{
+            printf("There are %d empty spots.\n", epoint);
+        }
+    }
+    return 0;
+}
+
+
+//差一步的版本
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -54,6 +112,15 @@ int main()
 
 
 /*
+while 條件：要寫成三個同時為 0 才結束，不然就會提前跳出。
+
+座標系統：題目是 1-based，你的陣列是 0-based，所以要減 1。
+
+矩形範圍：要用 <=，因為矩形是閉區間。
+
+初始化：要記得每組測資都要清乾淨，不然會殘留。
+
+輸出文字：單數要用 spot，這種小細節也會被判 WA。
 1.矩形座標讀取順序錯誤
     原本 scanf("%d%d%d%d", &x1,&x2,&y1,&y2);
     正確應該是 scanf("%d%d%d%d", &x1,&y1,&x2,&y2);
