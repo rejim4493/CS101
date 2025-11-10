@@ -1,0 +1,164 @@
+/*
+A boolean matrix has the parity property when each row and each column has an even sum, i.e. contains
+an even number of bits which are set. Here’s a 4 × 4 matrix which has the parity property:
+1 0 1 0
+0 0 0 0
+1 1 1 1
+0 1 0 1
+The sums of the rows are 2, 0, 4 and 2. The sums of the columns are 2, 2, 2 and 2.
+Your job is to write a program that reads in a matrix and checks if it has the parity property. If
+not, your program should check if the parity property can be established by changing only one bit. If
+this is not possible either, the matrix should be classified as corrupt.
+Input
+The input file will contain one or more test cases. The first line of each test case contains one integer
+n (n < 100), representing the size of the matrix. On the next n lines, there will be n integers per line.
+No other integers than ‘0’ and ‘1’ will occur in the matrix. Input will be terminated by a value of 0 for
+n.
+Output
+For each matrix in the input file, print one line. If the matrix already has the parity property, print
+‘OK’. If the parity property can be established by changing one bit, print ‘Change bit (i,j)’ where i
+is the row and j the column of the bit to be changed. Otherwise, print ‘Corrupt’.
+Sample Input
+4
+1 0 1 0
+0 0 0 0
+1 1 1 1
+0 1 0 1
+4
+1 0 1 0
+0 0 1 0
+1 1 1 1
+0 1 0 1
+4
+1 0 1 0
+0 1 1 0
+1 1 1 1
+0 1 0 1
+0
+Sample Output
+OK
+Change bit (2,3)
+Corrupt
+
+底下兩個版本只差在判別用的變數，一個是bool，一個有算位置。
+
+*/
+//最終正確版
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int size = 0;
+    int n[105][105] = {};
+    
+    while(scanf("%d", &size) == 1 && size != 0){//input size
+        for(int i = 0; i<size; i+=1){//row
+            for(int j = 0; j<size; j+=1){//col
+                scanf("%d", &n[i][j]);//n = 4, 0 1 2 3 index
+            }
+        }//input array
+        
+        int rowError = -1, colError = -1;
+        
+        //check row
+        for(int i = 0; i<size; i+=1){
+            int sum = 0;
+            for(int j = 0; j<size; j+=1){//col
+                sum += n[i][j];// 0 0;0 1 0 2 0 3
+            }
+            if(sum%2 != 0){
+                if(rowError == -1){
+                    rowError = i;
+                }else{
+                    rowError = -2;
+                }
+            }
+        }
+
+        //check col
+        for(int i = 0; i<size; i+=1){
+            int sum = 0;
+            for(int j = 0; j<size; j+=1){//col
+                sum += n[j][i];//0 0 1 0 2 0 3 0
+            }
+            if(sum%2 != 0){
+                if(colError == -1){
+                    colError = i;
+                }else{
+                    colError = -2;
+                }
+            }
+        }
+        
+        if(rowError == -1 && colError == -1){
+            printf("OK\n");
+        }else if(rowError >= 0 && colError >= 0){
+            printf("Change bit (%d,%d)\n", rowError+1, colError+1);
+        }else{
+            printf("Corrupt\n");
+        }
+    }
+    return 0;
+}
+
+/*
+
+*/
+
+//只檢查OK或corrupt
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int size = 0;
+    int n[105][105] = {};
+    bool PP = true;// expect pp yes 
+    while(scanf("%d", &size) == 1 && size != 0){
+        for(int i = 0; i<size; i+=1){//row
+            for(int j = 0; j<size; j+=1){//col
+                scanf("%d", &n[i][j]);//n = 4, 0 1 2 3 index
+            }
+        }
+        for(int i = 0; i<size; i+=1){//row
+            int sum = 0;
+            for(int j = 0; j<size; j+=1){//col
+                sum += n[i][j];// 0 0;0 1 0 2 0 3
+            }
+            if(sum%2 != 0){
+                PP = false;
+                break;
+            }
+        }
+        for(int i = 0; i<size; i+=1){//col
+            int sum = 0;
+            for(int j = 0; j<size; j+=1){
+                sum += n[j][i];//0 0 1 0 2 0 3 0
+            }
+            if(sum%2 != 0){
+                PP = false;
+                break;
+            }
+        }
+        
+        if(PP == 1){
+            printf("OK\n");
+        }else if(PP != 1){
+            printf("Corrupt\n");
+        }
+        PP = true;
+    }
+    
+    return 0;
+    
+    /*
+    
+    printf("Change bit (%d,%d)\n", , );
+    
+    */
+}
+
+/*
+
+*/
