@@ -45,6 +45,8 @@
     上課練習(a)  
     作業(b)  
       [EX4.8-Monster Hunting (II)](.../blob/main/7-b-EX4.8-Monster%20Hunting%20(II)%20.cpp)
+
+[EX4.8-Monster Hunting (II)](.../blob/main/7-b-EX4.8-Monster%20Hunting%20(II)%20.cpp)
 ## 第八週(8)(1020-1026)  
     上課練習(a)  
     作業(b)
