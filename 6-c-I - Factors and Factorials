@@ -1,0 +1,74 @@
+/*
+The factorial of a number N (written N!) is defined as the product of all the integers from 1 to N. It
+is often defined recursively as follows:
+1! = 1
+N! = N ∗ (N − 1)!
+Factorials grow very rapidly — 5! = 120, 10! = 3, 628, 800. One way of specifying such large numbers
+is by specifying the number of times each prime number occurs in it, thus 825 could be specified as (0
+1 2 0 1) meaning no twos, 1 three, 2 fives, no sevens and 1 eleven.
+Write a program that will read in a number N (2 ≤ N ≤ 100) and write out its factorial in terms
+of the numbers of the primes it contains.
+Input
+Input will consist of a series of lines, each line containing a single integer N. The file will be terminated
+by a line consisting of a single ‘0’.
+Output
+Output will consist of a series of blocks of lines, one block for each line of the input. Each block will
+start with the number N, right justified in a field of width 3, and the characters ‘!’, space, and ‘=’. This
+will be followed by a list of the number of times each prime number occurs in N!.
+These should be right justified in fields of width 3 and each line (except the last of a block, which
+may be shorter) should contain fifteen numbers. Any lines after the first should be indented.
+Follow the layout of the example shown below exactly.
+Sample Input
+5
+53
+0
+Sample Output
+  5! =  3  1  1
+ 53! = 49 23 12 8 4 4 3 2 2 1 1 1 1 1 1
+        1
+*/
+#include <stdio.h>
+#include <stdlib.h>
+
+int prime[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
+                    31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+                    73, 79, 83, 89, 97};
+
+int main()
+{
+    int N = 0;
+    while(scanf("%d", &N) && N !=0){
+    printf("%3d! =", N);
+    
+    int count[25] = {0};
+    
+    //count prime in N!
+    for(int i = 0;i<25 && prime[i] <= N; i += 1){
+        int p = prime[i];
+        int temp = N;
+        while(temp>0){
+            temp /= p;
+            count[i] += temp;//why temp?
+        }
+    }
+    
+    //output
+    int printed = 0;
+    for(int i=0;prime[i] <= N; i+=1){
+        if(printed == 15){
+            printf("\n      ");
+            printed = 0;
+        }
+        printf("%3d", count[i]);
+        printed++;
+    }
+    
+    printf("\n");
+    
+    }
+    return 0;
+}
+
+/*
+5! = 5*4*3*2*1, 2 have 3, 3 have 1, 5 have 1
+*/
