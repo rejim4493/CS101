@@ -1,0 +1,34 @@
+    /*
+    char ch, ch2 = '2';
+    printf("Please input a char...>");
+    scanf("%c", &ch);
+    printf("input is [%c].\n"
+              "%c", ch, ch2);
+              */
+
+    /*
+    printf("Input characters...>");
+    char ch;
+    while ( (ch = getchar() ) != EOF){
+        putchar(ch);
+    }
+    //printf all string
+
+    */
+
+    /*
+    printf("Please input a string...>");
+    char ch;
+
+    scanf("%c", &ch);
+    while (ch != '\n')
+    {
+        printf("%c", ch);
+        scanf("%c", &ch);
+    }
+    */
+    /*
+    '0'~'9'
+    'A'
+    'a'~'z'//z is bigest
+    */
